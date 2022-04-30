@@ -1,12 +1,25 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
+from django.core import serializers
+
 from mascota.forms import MascotaForm, VacunaForm
 from mascota.models import Mascota, Vacuna
 
 
 # Create your views here.
+
+def listadousers(request):
+    lista = serializers.serialize('json', User.objects.all(), fields=['username', 'first_name'])
+    return HttpResponse(lista, content_type='application/json')
+
+
+def listado(request):
+    lista = serializers.serialize('json', Mascota.objects.all())
+    return HttpResponse(lista, content_type='application/json')
+
 def index(request):
     #return HttpResponse("Index")
     return render(request,"mascota/index.html")
@@ -80,6 +93,7 @@ def vacuna_delete(request,id_vacuna):
 class MascotaList(ListView):
     model = Mascota
     template_name = "mascota/mascota_list.html"
+    paginate_by = 2
 
 class MascotaCreate(CreateView):
     model = Mascota

@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from mascota.views import index, mascota_view, mascota_list, mascota_edit, mascota_delete, \
     MascotaList, MascotaCreate, MascotaUpdate, MascotaDelete, VacunaList, VacunaCreate, VacunaUpdate, \
-    VacunaDelete, vacuna_view, vacuna_list, vacuna_edit, vacuna_delete
+    VacunaDelete, vacuna_view, vacuna_list, vacuna_edit, vacuna_delete, listado, listadousers
 
 urlpatterns = [
     url(r'^nuevofuncion/$', mascota_view, name="mascota_crearfuncion"),
@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'vacuna/listarvfuncion/', vacuna_list, name="vacuna_listarfuncion"),
     url(r'vacuna/editarvfuncion/(?P<id_vacuna>\d+)/', vacuna_edit, name="vacuna_editarfuncion"),
     url(r'vacuna/eliminarvfuncion/(?P<id_vacuna>\d+)/', vacuna_delete, name="vacuna_eliminarfuncion"),
+    url(r'listado/', listado, name="listado"),
+    url(r'listado-users/', listadousers, name="listado_users"),
     url(r'^$', MascotaList.as_view(), name="index"),
     #url(r'', index, name="index"),
 ]
